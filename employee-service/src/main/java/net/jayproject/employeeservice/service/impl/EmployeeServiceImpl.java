@@ -3,6 +3,7 @@ package net.jayproject.employeeservice.service.impl;
 import lombok.AllArgsConstructor;
 import net.jayproject.employeeservice.dto.EmployeeDto;
 import net.jayproject.employeeservice.entity.Employee;
+import net.jayproject.employeeservice.exceptions.ResourceNotFoundException;
 import net.jayproject.employeeservice.mapper.AutoEmployeeMapper;
 import net.jayproject.employeeservice.repository.EmployeeRepository;
 import net.jayproject.employeeservice.service.EmployeeService;
@@ -29,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto getEmployeeById(Long employeeId) {
-        Employee employee = employeeRepository.findById(employeeId).get();
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() -> new ResourceNotFoundException("Employee", "id", employeeId));
 
         EmployeeDto employeeDto = AutoEmployeeMapper.MAPPER.mapToEmployeeDto(employee);
 
