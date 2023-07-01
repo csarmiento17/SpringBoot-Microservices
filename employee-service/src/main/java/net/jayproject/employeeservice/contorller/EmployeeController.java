@@ -1,6 +1,7 @@
 package net.jayproject.employeeservice.contorller;
 
 import lombok.AllArgsConstructor;
+import net.jayproject.employeeservice.dto.APIResponseDto;
 import net.jayproject.employeeservice.dto.EmployeeDto;
 import net.jayproject.employeeservice.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,9 @@ public class EmployeeController {
     }
 
     @GetMapping("{empId}")
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("empId") Long id) {
-        EmployeeDto employeeDto = employeeService.getEmployeeById(id);
+    public ResponseEntity<APIResponseDto> getEmployee(@PathVariable("empId") Long id) {
+        APIResponseDto apiResponseDto = employeeService.getEmployeeById(id);
 
-        return new ResponseEntity<>(employeeDto, HttpStatus.OK);
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
     }
 }
